@@ -1,3 +1,5 @@
+package edu.ufsj.lox;
+
 private int line = 1;
 
 private static final Map<String, TokenType> keywords;
