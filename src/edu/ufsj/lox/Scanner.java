@@ -123,11 +123,11 @@ class Scanner {
     String value = source.substring(start + 1, current - 1); //tbm extrai valor literal da string
     addToken(STRING, value);
   }
-    
-  private boolean isDigit ( char c ) {
-	  return c >= ’0’ && c <= ’9’;
-	  }
-    
+
+  private boolean isDigit(char c) {
+      return c >= '0' && c <= '9';
+  }
+  
   private void number(){
     while(isDigit(peek())) advance();
     //procura a parte fracionaria
@@ -192,6 +192,7 @@ private void identifier(){
         type = IDENTIFIER;
     }
     addToken(type);
-    } 
+}
+  
 
 }
