@@ -1,0 +1,7 @@
+package edu.ufsj.lox;
+
+class AstPrinter implements Expr.Visitor<String> {
+	  
+	
+}
+
