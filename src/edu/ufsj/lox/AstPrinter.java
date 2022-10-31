@@ -9,6 +9,11 @@ class AstPrinter implements Expr.Visitor<String> {
 	    return parenthesize(expr.operator.lexeme,
 	                        expr.left, expr.right);
 	  }
+	  public String visitTernaryExpr(Expr.Ternary expr){
+		return parenthesize(expr.leftOperator.lexeme,
+							expr.rightOperator.lexeme, 
+							expr.left, expr.middle, expr.right);
+	  }
 
 	  @Override
 	  public String visitGroupingExpr(Expr.Grouping expr) {
@@ -24,6 +29,9 @@ class AstPrinter implements Expr.Visitor<String> {
 	  @Override
 	  public String visitUnaryExpr(Expr.Unary expr) {
 	    return parenthesize(expr.operator.lexeme, expr.right);
+	  }
+	  public String visitLogicalExpr(Expr.Logical expr){
+		return parenthesize(expr.operator.lexeme, expr.left, expr.right);
 	  }
 	
 	  private String parenthesize(String name, Expr... exprs) {

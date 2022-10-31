@@ -24,6 +24,30 @@ public class Parser {
 	private Expr expression() {
 		return equality();
 	}
+
+	private Expr ternary(){
+		Expr expr = or();
+
+		if match(QUESTION){
+			Token leftOperator = previous();
+			Expr middle = expression();
+			Token rightOperator = consume(COLON, "Expect ':' in ternary operator.");
+			Expr right = expression();
+			expr = new Expr.Ternary(expr, leftOperator, middle, rightOperator, right);
+		}
+		return expr;
+	}
+
+	private Expr and(){
+		Expr expr = equality();
+
+		while(match(AND)){
+			Token operator = previous();
+			Expr right = equality();
+			expr = new Expr.Logical(expr, operator, right);
+		}
+		return expr;
+	}
 	private Expr equality() {
 		Expr expr = comparison();
 		while(match(BANG_EQUAL, EQUAL_EQUAL)) {

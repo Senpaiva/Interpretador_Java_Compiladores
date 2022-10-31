@@ -4,7 +4,9 @@ abstract class Expr {
 	interface Visitor<R> {
 		R visitBinaryExpr(Binary expr);
 		R visitGroupingExpr(Grouping expr);
+		R visitTernaryExpr(Ternary expr);
 		R visitLiteralExpr(Literal expr);
+		R visitLogicalExpr(Logical expr);
 		R visitUnaryExpr(Unary expr);
 	}
 
@@ -36,6 +38,26 @@ abstract class Expr {
 		final Expr expression;
 	}
 
+	static class Ternary extends Expr{
+		final Expr left;
+		final Token leftOperator;
+		final Expr middle;
+		final Token rightOperator;
+		final Expr right;
+		Ternary(Expr left, Token leftOperator, Expr middle, 
+				Token rightOperator, Expr right){
+			this.left = left;
+			this.leftOperator = leftOperator;
+			this.middle = middle;
+			this.rightOperator = rightOperator;
+			this.right = right;
+		}
+		@Override
+		<R> R accept(Visitor<R> visitor){
+			return visitor.visitTernaryExpr(this);
+		}
+	}
+
 	static class Literal extends Expr {
 		Literal(Object value) {
 			this.value = value;
@@ -46,6 +68,22 @@ abstract class Expr {
 		}
 
 		final Object value;
+	}
+
+	static class Logical extends Expr {
+		final Expr left;
+		final Token operator;
+		final Expr right;
+
+		Logical(Expr left, Token operator, Expr right){
+			this.left = left;
+			this.operator = operator;
+			this.right = right;
+		}
+		@Override
+		<R> R accept(Visitor<R> visitor){
+			 return visitor.visitLogicalExpr(this);
+		}
 	}
 
 	static class Unary extends Expr {
