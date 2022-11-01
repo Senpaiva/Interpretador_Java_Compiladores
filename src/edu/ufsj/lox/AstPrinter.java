@@ -10,7 +10,7 @@ class AstPrinter implements Expr.Visitor<String> {
 	                        expr.left, expr.right);
 	  }
 	  public String visitTernaryExpr(Expr.Ternary expr){
-		return parenthesize(expr.leftOperator.lexeme,
+		return parenthesize(expr.leftOperator.lexeme +
 							expr.rightOperator.lexeme, 
 							expr.left, expr.middle, expr.right);
 	  }
