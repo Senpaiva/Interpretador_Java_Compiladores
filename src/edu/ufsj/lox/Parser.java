@@ -25,7 +25,7 @@ public class Parser {
 		return ternary();
 	}
 
-	private Expr ternary(){
+	private Expr ternary(){ // trocar gramática para <ternary> ::= <equality> <?> <expression> <:> <ternary>
 		Expr expr = equality();
 
 		if (match(QUESTION)){
