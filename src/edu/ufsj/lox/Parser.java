@@ -30,9 +30,9 @@ public class Parser {
 
 		if (match(QUESTION)){
 			Token leftOperator = previous();
-			Expr middle = equality();
+			Expr middle = expression();
 			Token rightOperator = consume(COLON, "Expect ':' in ternary operator.");
-			Expr right = equality();
+			Expr right = ternary();
 			expr = new Expr.Ternary(expr, leftOperator, middle, rightOperator, right);
 		}
 		return expr;
