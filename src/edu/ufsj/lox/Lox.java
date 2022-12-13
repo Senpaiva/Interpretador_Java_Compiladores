@@ -53,8 +53,8 @@ public class Lox {
         //em caso de erro, encerra a analise
         if(hadError) return;
         System.out.println(new AstPrinter().print(expression));
-        
-        }
+        new Interpreter().interpret(expression);
+    }
     
 
     static void error(int line, String message) {
